@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TodoDispatchContext } from "../../../store/todo/todoContext";
+import { TODO_CASE } from "../../../store/todo/todoInterfase";
 
-function AddTask({onAddTodo}: {onAddTodo: (pop:string) => void}) {
+function AddTask() {
+
+    const dispatch = useContext(TodoDispatchContext)
+
     const [text, setText] = useState('')
+    
     const handleClick = () => {
-        onAddTodo(text);
+         dispatch({
+                    type: TODO_CASE.ADD_TODO,
+                    payload: {
+                        title: text
+                    }
+                })
         setText('');
     }
    
